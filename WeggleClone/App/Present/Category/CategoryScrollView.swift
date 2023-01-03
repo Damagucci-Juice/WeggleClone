@@ -33,7 +33,6 @@ struct CategoryScrollView: View {
                     }
                 }
             }
-            .padding(.horizontal)
         }
     }
 }

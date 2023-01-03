@@ -9,12 +9,11 @@ import SwiftUI
 
 @main
 struct WeggleCloneApp: App {
-    @StateObject private var container = DIContainer(factory: DependencyFactory(imageManager: ImageManager()))
-    
+    private let imageManager = ImageManager()
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(container)
+                .environmentObject(imageManager)
         }
     }
 }

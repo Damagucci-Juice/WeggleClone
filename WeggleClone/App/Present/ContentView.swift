@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var container: DIContainer
     
     var body: some View {
         TabView {
@@ -16,7 +15,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("홈", systemImage: "house")
                 }
-            ProfileView(viewModel: container.profileViewModel)
+            ProfileView()
                 .tabItem {
                     Label("마이", systemImage: "person.crop.circle")
                 }

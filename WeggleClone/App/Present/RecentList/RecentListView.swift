@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct RecentListView: View {
-    @ObservedObject var viewModel: RecentListViewModel
-    private var count: Int {
-        viewModel.dogs.count
-    }
+    private var count: Int = 6
+    @State var selectedField: DogField = .shiba
     var body: some View {
         VStack {
             HeadLineView(title: "최근 본 상품", subTitle: "눈여겨본 상품 놓치지 마세요")
@@ -20,7 +18,7 @@ struct RecentListView: View {
                 HStack {
                     ForEach(0..<count, id: \.self) { index in
                         VStack(alignment: .leading) {
-                            ImageCell(dog: viewModel.dogs[index])
+                            ImageCell(selectedField: $selectedField)
                                 .frame(width: LayoutConst.threeBoxWidth,
                                        height: LayoutConst.threeBoxWidth)
                                 .clipped()
@@ -40,6 +38,5 @@ struct RecentListView: View {
             }
             .padding(.top, 20)
         }
-        .padding(.horizontal)
     }
 }

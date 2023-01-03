@@ -9,8 +9,6 @@ import SwiftUI
 import AVKit
 
 struct ProfileView: View {
-    @ObservedObject var viewModel: ProfileViewModel
-    
     var body: some View {
         VideoPlayer(player: AVPlayer(url:  URL(string: "https://bit.ly/swswift")!)) {
             VStack {

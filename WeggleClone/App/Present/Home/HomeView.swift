@@ -8,21 +8,19 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var container: DIContainer
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 30) {
-                    BannerView(viewModel: container.bannerViewModel)
+                    BannerView()
                     
-//                    CategoryScrollView()
-                    
-//                    RecentListView(viewModel: container.recentListViewModel)
-
-//                    GroupPurchaseView(viewModel: container.groupPurchaseViewModel)
-                    
-                    // 따끈따끈 신규 리뷰 영상
+                    CategoryScrollView()
+                        .padding(.horizontal)
+                    RecentListView()
+                        .padding(.horizontal)
+                    GroupPurchaseView()
+                        .padding(.horizontal)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)

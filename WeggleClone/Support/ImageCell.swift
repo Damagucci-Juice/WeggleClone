@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ImageCell: View {
-    let dog: Dog
+    @State private var dog: Dog = Dog(url: nil)
+    @EnvironmentObject var imageManager: ImageManager
+    @Binding var selectedField: DogField
     
     var body: some View {
         AsyncImage(url: dog.url) { phase in
@@ -25,5 +27,15 @@ struct ImageCell: View {
                 EmptyView()
             }
         }
+        .onAppear{
+            Task {
+                self.dog = await loadDog(selectedField)
+            }
+        }
+    }
+    
+    func loadDog(_ field: DogField) async -> Dog {
+        guard let dog = try? await imageManager.requestImages(field.rawValue) else { fatalError() }
+        return dog
     }
 }

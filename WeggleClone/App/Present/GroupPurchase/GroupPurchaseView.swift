@@ -12,8 +12,8 @@ enum DogField: String, Hashable, CaseIterable {
 }
 
 struct GroupPurchaseView: View {
-    @State private var selectedField: DogField?
-    @ObservedObject var viewModel: GroupPurchaseViewModel
+    @State var selectedField: DogField = .shiba
+    private let count = 6
     private let normalBackground = Color(.systemGray5)
     private let accentBackground = Color(.systemPink)
     private let textColor = Color.gray
@@ -28,7 +28,6 @@ struct GroupPurchaseView: View {
                 Button("시바견") {
                     withAnimation {
                         selectedField = .shiba
-                        viewModel.changeField(.shiba)
                     }
                 }
                 .foregroundColor(selectedField == .shiba
@@ -42,7 +41,6 @@ struct GroupPurchaseView: View {
                 Button("비글") {
                     withAnimation {
                         selectedField = .beagle
-                        viewModel.changeField(.beagle)
                     }
                 }
                 .foregroundColor(selectedField == .beagle
@@ -56,7 +54,6 @@ struct GroupPurchaseView: View {
                 Button("딩고") {
                     withAnimation {
                         selectedField = .dingo
-                        viewModel.changeField(.dingo)
                     }
                 }
                 .foregroundColor(selectedField == .dingo
@@ -70,9 +67,9 @@ struct GroupPurchaseView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(0..<viewModel.dogs.count, id: \.self) { index in
+                    ForEach(0..<count, id: \.self) { index in
                         VStack(alignment: .leading) {
-                            ImageCell(dog: viewModel.dogs[index])
+                            ImageCell(selectedField: $selectedField)
                                 .frame(width: LayoutConst.threeBoxWidth,
                                        height: LayoutConst.threeBoxWidth)
                                 .clipped()
@@ -91,11 +88,9 @@ struct GroupPurchaseView: View {
                 }
             }
         }
-        .padding(.horizontal)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 selectedField = .shiba
-                viewModel.changeField(.shiba)
             }
         }
     }

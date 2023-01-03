@@ -7,17 +7,15 @@
 //
 import SwiftUI
 
-struct BannerView: View {
-    @ObservedObject var viewModel: BannerViewModel
+struct BannerView: View {    
     @State private var pageIndex = 0
-    private var count: Int {
-        viewModel.dogs.count
-    }
+    @State var selectedField: DogField = .shiba
+    private var count = 2
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             TabView(selection: $pageIndex) {
                 ForEach(0..<count, id: \.self) { index in
-                    ImageCell(dog: viewModel.dogs[index]).tag(index)
+                    ImageCell(selectedField: $selectedField).tag(index)
                 }
             }
             .frame(minWidth: UIScreen.screenWidth, maxWidth: UIScreen.screenWidth,
